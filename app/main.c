@@ -14,7 +14,7 @@ typedef struct{
 	uint32_t state;
 }TaskBlock;
 
-/*
+
 #define initTaskBlock(x) ((x)->state = Initial)
 #define yield(x) (x)->state = __LINE__;} break; case __LINE__:
 #define startTask(x) switch((x)->state) { case Initial:
@@ -57,8 +57,6 @@ void yieldLED(TaskBlock *tb){
 		endTask(tb);
 	}
 }
-
-*/
 
 void initSysTick(){
 	if(SysTick_Config(SystemCoreClock / 1000)){
