@@ -9,9 +9,8 @@
   .extern HAL_IncTick
   .extern taskOneStack
   .extern taskTwoStack
-  .extern mainQueue
+  .extern runningTcb
   .extern readyQueue
-
   .section .text.taskSwitch
   .type taskSwitch, %function
 /*
@@ -37,6 +36,19 @@ taskSwitch:
    .align 8
    .type SysTick_Handler, %function
 SysTick_Handler:
+	push	{r4-r11}          //push all necessary register into stack
+	ldr		r4, = runningTcb //load the address of runningQueue into r4
+	ldr		r4, [r4]          //derefence r4,head value into r4
+	ldr		r4, [r4,#4]       //from head point to SP
+	str     sp, [r4,#4]       //get r4 sp value into stack sp
+	push	{r7,lr}
+
+	ldr     r0, = readyQueue // store readyQueue into r0 then remove head
+	bl		List_removeFirst
+	ldr     r5, r0
+	//ldr
+
+/*
  	push 	{r4-r11}
   	ldr 	r0, = mainQueue
   	ldr 	r1, [r0]
@@ -48,7 +60,7 @@ SysTick_Handler:
 	pop 	{r4-r11}
     bx     lr
 
-
+*/
 //	push {r4-r11}
 //	ldr r0,= mainQueue
 //	str sp,[r1,#4]

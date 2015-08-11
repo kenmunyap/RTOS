@@ -16,7 +16,7 @@ typedef struct{
 
 
 #define initTaskBlock(x) ((x)->state = Initial)
-#define yield(x) (x)->state = __LINE__;} break; case __LINE__:
+#define yield(x) (x)->state = __LINE__; break; case __LINE__:
 #define startTask(x) switch((x)->state) { case Initial:
 #define endTask(x)  };
 
@@ -27,12 +27,12 @@ void yieldLED(TaskBlock *tb){
 		startTask(tb);
 		while(1){
 				turnOFFLED3();
-				if(delay(10,previousTime)){
+				if(delay(10,previousTime))
 					previousTime = updateTimer();
 					turnONLED1(); turnOFFLED2();
 					yield(tb);
 
-				if(delay(10,previousTime)){
+				if(delay(10,previousTime))
 					previousTime = updateTimer();
 					turnOFFLED1(); turnONLED2();
 					yield(tb);
@@ -42,15 +42,15 @@ void yieldLED(TaskBlock *tb){
 	}else{
 		startTask(tb);
 		while(1){
-			if(delay(100,previousTime)){
+			if(delay(100,previousTime))
 					previousTime = updateTimer();
 					turnONLED1(); turnOFFLED2(); turnOFFLED3();
 					yield(tb);
-			if(delay(100,previousTime)){
+			if(delay(100,previousTime))
 					previousTime = updateTimer();
 					turnOFFLED1(); turnONLED2(); turnOFFLED3();
 					yield(tb);
-			if(delay(100,previousTime)){
+			if(delay(100,previousTime))
 					previousTime = updateTimer();
 					turnOFFLED1(); turnOFFLED2(); turnONLED3();
 		}
