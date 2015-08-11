@@ -7,20 +7,26 @@ typedef struct Element_t Element;
 typedef struct{
 	Element *head;
 	Element *tail;
-	int length;
+  int length;
 }linkedList;
 
 //Struct of Element;
 typedef struct Element_t{
-	struct Element_t *next;
+	void *next;
 	int data;
 }Element;
 
-//Function prototype
-linkedList *create_linkedList();
+
+void initLinkedList(linkedList *list);
 void List_addLast(linkedList *list,Element *element);
-void List_addFirst(linkedList *list,Element *element);
-Element *List_removeLast(linkedList *list);
 Element *List_removeFirst(linkedList *list);
+
+
+//Function prototype
+// linkedList *create_linkedList();
+// void List_addLast(linkedList *list,Element *element);
+// void List_addFirst(linkedList *list,Element *element);
+// Element *List_removeLast(linkedList *list);
+// Element *List_removeFirst(linkedList *list);
 
 #endif //__LINKED_LIST_H__
