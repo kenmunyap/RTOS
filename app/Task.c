@@ -44,6 +44,7 @@ void InitTcb(){
   cc->xpsr = 0x1200;
 
   runningTcb = &mainTcb;
-  initLinkedList(&taskOneTcb);
+  initLinkedList(&readyQueue);
+  List_addLast(&readyQueue,&taskOneTcb);
 }
 

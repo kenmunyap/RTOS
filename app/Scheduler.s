@@ -42,10 +42,13 @@ SysTick_Handler:
 	ldr		r4, [r4,#4]       //from head point to SP
 	str     sp, [r4,#4]       //get r4 sp value into stack sp
 	push	{r7,lr}
-
 	ldr     r0, = readyQueue // store readyQueue into r0 then remove head
 	bl		List_removeFirst
 	ldr     r5, r0
+	ldr		r5, [r0,#4]
+	str 	sp, [r0,#4]
+	ldr 	runningTcb, r5
+
 	//ldr
 
 /*
