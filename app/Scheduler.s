@@ -39,17 +39,30 @@ SysTick_Handler:
 	push	{r4-r11}          //push all necessary register into stack
 	ldr		r4, = runningTcb //load the address of runningQueue into r4
 	ldr		r4, [r4]          //derefence r4,head value into r4
-	ldr		r4, [r4,#4]       //from head point to SP
 	str     sp, [r4,#4]       //get r4 sp value into stack sp
-	push	{r7,lr}
+	push	{lr}
 	ldr     r0, = readyQueue // store readyQueue into r0 then remove head
-	bl		List_removeFirst
-	ldr     r5, r0
-	ldr		r5, [r0,#4]
-	str 	sp, [r0,#4]
-	ldr 	runningTcb, r5
+	bl		List_removeFirst //remove TaskOneTCB at LinkedList
+	mov		r5,r0
+	ldr	    r5,[r5]
+	ldr 	sp,[r5,#4]
+	mov 	r1,r4
+ 	bl	    List_addLast
+ 	pop	    {r7, lr}
+ 	ldr 	sp,[r5,#4]
+	pop 	{r4-r11}
+ 	bx		lr
+	//str	    r0, [r1]
+  	//ldr	    r0, =readyQueue
+  	//mov	    r1, r4
 
-	//ldr
+ 	//pop	    {r7, lr}
+  	//ldr	    sp, [r5, #4]
+  	//pop	    {r4-r11}
+   // bx	    lr
+
+
+
 
 /*
  	push 	{r4-r11}

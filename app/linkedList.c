@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include "linkedList.h"
-
+#include "Task.h"
 
 void initLinkedList(linkedList *list){
   list->head = NULL;
